@@ -4,15 +4,23 @@ import rootReducer from './reducers/index'
 import { createBrowserHistory } from 'history'
 import { applyMiddleware, compose, createStore } from 'redux'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
-/*HISTORY*/
+/*SAGA*/
+import createSagaMiddleware from 'redux-saga'
+import mainSaga from './sagas/index'
+
+/** history **/
 export const history = createBrowserHistory();
+/** create the saga middleware **/
+const sagaMiddleware = createSagaMiddleware()
 const enhancers = [];
 
+
 const middleware = [
+  sagaMiddleware,
   routerMiddleware(history) // for dispatching history actions
 ];
 
-/*Use Redux console in dev mode*/
+/** use Redux console in dev mode **/
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
 
@@ -30,3 +38,6 @@ export const store = createStore(
   connectRouter(history)(rootReducer), // new root reducer with router state
   composedEnhancers
 );
+
+/** then run the saga **/
+sagaMiddleware.run(mainSaga);

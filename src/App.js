@@ -10,11 +10,9 @@ const App = ({ history }) => {
   return (
     <div className="App">
       <Header/>
-
       <ConnectedRouter history={history}>
         { routes }
       </ConnectedRouter>
-
       <Footer/>
     </div>
   )

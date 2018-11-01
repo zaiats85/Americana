@@ -54,7 +54,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "lint": "eslint_d ./ --ignore-pattern node_modules/"
+
   },
   "jest": {
     "collectCoverageFrom": [
@@ -96,7 +98,11 @@
     ]
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "env": {
+      "browser": true,
+      "node": true
+    }
   },
   "devDependencies": {
     "node-sass": "^4.9.3",
